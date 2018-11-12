@@ -62,7 +62,7 @@ Will render:
 ## Installation
 
 ```bash
-composer require ropendev/platesattributes
+composer require piedweb/render-html-attributes
 ```
 
 ## Requirements
