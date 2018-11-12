@@ -2,7 +2,7 @@
     "name": "piedweb/render-html-attributes",
     "description": "[Plates and Twig Extension] Transform an array in html tag attributes.",
     "keywords": ["templating", "template", "view", "plates", "twig", "attributes", "html"],
-    "homepage": "https://github.com/PiedWeb/RenderHtmlAtribute",
+    "homepage": "https://piedweb.com",
     "license": "MIT",
     "authors": [
         {

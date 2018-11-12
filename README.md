@@ -6,15 +6,15 @@ Two features for the same goal **Manipulate html tag attributes via object/PHP a
 * `attr({class: "col", id: "piedweb", data-content:"Hello :)', ...})` transform an array in html tag attributes
 * `mergeAttr($attributes1, $attributes2, [$attributes3, ...])` merge multiple array without loosing values (Eg. : `['class' => 'main']` + `['class' => 'content']` = `['class' => 'main content']`)
 
-##Table of contents
+## Table of contents
 * [Usage](#usage)
 * [Installation](#installation)
-    * [Packagist](https://packagist.org/packages/ropendev/cache)
+    * [Packagist](https://packagist.org/packages/piedweb/render-html-attributes)
 * [Requirements](#requirements)
 * [Contributors](#contributors)
 * [Licence](#licence)
 
-##Usage
+## Usage
 
 ## For Twig :
 
