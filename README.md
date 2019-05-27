@@ -9,7 +9,7 @@
 [![Build Status](https://img.shields.io/travis/PiedWeb/RenderHtmlAttribute/master.svg?style=flat)](https://travis-ci.org/PiedWeb/RenderHtmlAttribute)
 [![Quality Score](https://img.shields.io/scrutinizer/g/PiedWeb/RenderHtmlAttribute.svg?style=flat)](https://scrutinizer-ci.com/g/PiedWeb/RenderHtmlAttribute)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/PiedWeb/RenderHtmlAttribute.svg?style=flat)](https://scrutinizer-ci.com/g/PiedWeb/RenderHtmlAttribute/code-structure)
-[![Total Downloads](https://img.shields.io/packagist/dt/piedweb/render-html-attribute.svg?style=flat)](https://packagist.org/packages/piedweb/render-html-attribute)
+[![Total Downloads](https://img.shields.io/packagist/dt/piedweb/render-html-attributes.svg?style=flat)](https://packagist.org/packages/piedweb/render-html-attributes)
 
 This package is an extension for both [Twig](https://github.com/twigphp/Twig) and Plate engine [Plates](https://github.com/thephpleague/plates).
 
