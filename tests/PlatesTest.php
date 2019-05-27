@@ -26,7 +26,6 @@ class PlatesTest extends TestCase
         $expected = ['class' => 'main content'];
 
         $result   = $this->attributes->mergeAttributes($arr1, $arr2);
-
         $this->assertSame($expected, $result);
     }
 
@@ -35,7 +34,7 @@ class PlatesTest extends TestCase
         $attr     = ['class' => 'main content'];
         $expected = ' class="main content"';
 
-        $result = $this->attributes->mapAttributes($attr);
+        $result   = $this->attributes->mapAttributes($attr);
 
         $this->assertSame($expected, $result);
     }

@@ -25,7 +25,7 @@ class TwigTest extends TestCase
     {
         $twig   = '{{ attr({class:"main content"})|raw }}';
         $expected   = ' class="main content"';
-        var_dump($this->render($twig));
+
         $this->assertSame($this->render($twig), $expected);
     }
 
@@ -33,7 +33,7 @@ class TwigTest extends TestCase
     {
         $twig   = '{{ mergeAttr({class:"main"}, {class:"content"})|raw }}';
         $expected   = ' class="main content"';
-        var_dump($this->render($twig));
+
         $this->assertSame($this->render($twig), $expected);
     }
 }
