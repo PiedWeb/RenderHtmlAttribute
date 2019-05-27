@@ -22,8 +22,8 @@ class TwigExtension extends AbstractExtension
     public function getFunctions()
     {
         return array(
-            new TwigFunction('mergeAttr', [TwigExtension::class, 'mergeAndMapAttributes']),
-            new TwigFunction('attr', [TwigExtension::class, 'mapAttributes'])
+            new TwigFunction('mergeAttr', [TwigExtension::class, 'mergeAndMapAttributes'], ['is_safe' => ['html']]),
+            new TwigFunction('attr', [TwigExtension::class, 'mapAttributes'], ['is_safe' => ['html']])
         );
     }
 }

@@ -1,4 +1,15 @@
+<p align="center"><a href="https://dev.piedweb.com">
+<img src="https://raw.githubusercontent.com/PiedWeb/piedweb-devoluix-theme/master/src/img/logo_title.png" width="200" height="200" alt="Open Source Package" />
+</a></p>
+
 # Plates/Twig Extension : Render html tag attributes
+
+[![Latest Version](https://img.shields.io/github/tag/PiedWeb/RenderHtmlAttribute.svg?style=flat&label=release)](https://github.com/PiedWeb/RenderHtmlAttribute/tags)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](https://github.com/PiedWeb/RenderHtmlAttribute/blob/master/LICENSE)
+[![Build Status](https://img.shields.io/travis/PiedWeb/RenderHtmlAttribute/master.svg?style=flat)](https://travis-ci.org/PiedWeb/RenderHtmlAttribute)
+[![Quality Score](https://img.shields.io/scrutinizer/g/PiedWeb/RenderHtmlAttribute.svg?style=flat)](https://scrutinizer-ci.com/g/PiedWeb/RenderHtmlAttribute)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/PiedWeb/RenderHtmlAttribute.svg?style=flat)](https://scrutinizer-ci.com/g/PiedWeb/RenderHtmlAttribute/code-structure)
+[![Total Downloads](https://img.shields.io/packagist/dt/piedweb/render-html-attribute.svg?style=flat)](https://packagist.org/packages/piedweb/render-html-attribute)
 
 This package is an extension for both [Twig](https://github.com/twigphp/Twig) and Plate engine [Plates](https://github.com/thephpleague/plates).
 
