@@ -31,8 +31,8 @@ class PlatesTest extends TestCase
 
     public function testRendering()
     {
-        $attr     = ['class' => 'main content'];
-        $expected = ' class="main content"';
+        $attr     = ['class' => 'main content', 'loop' => ''];
+        $expected = ' class="main content" loop';
 
         $result   = $this->attributes->mapAttributes($attr);
 
