@@ -61,8 +61,12 @@ trait AttributesTrait
         $result = '';
 
         foreach ($attributes as $attribute => $value) {
-            $e = strpos($value, ' ') !== false ? '"' : '';
-            $result .= ' '.(is_int($attribute) ? $value : $attribute.'='.$e.str_replace('"', '&quot;', $value).$e);
+            if (empty($value)) {
+                $result .= ' '.$attribute;
+            } else {
+                $e = strpos($value, ' ') !== false ? '"' : '';
+                $result .= ' '.(is_int($attribute) ? $value : $attribute.'='.$e.str_replace('"', '&quot;', $value).$e);
+            }
         }
 
         return $result;
