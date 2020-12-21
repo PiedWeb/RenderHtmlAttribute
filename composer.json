@@ -1,49 +1,49 @@
 {
-    "name": "piedweb/render-html-attributes",
-    "description": "[Plates and Twig Extension] Transform an array in html tag attributes.",
-    "keywords": [
-        "templating",
-        "template",
-        "view",
-        "plates",
-        "twig",
-        "attributes",
-        "html"
-    ],
-    "homepage": "https://piedweb.com",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": ":Robin",
-            "email": "contact@robin-d.fr",
-            "homepage": "https://www.robin-d.fr/",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "php": ">=5.3.0"
-    },
-    "require-dev": {
-        "league/plates": "3.*",
-        "phpunit/phpunit": "4.*",
-        "twig/twig": "^1 || ^2"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        }
-    },
-    "autoload": {
-        "psr-4": {
-            "PiedWeb\\RenderAttributes\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "PiedWeb\\RenderAttributes\\Test\\": "tests"
-        }
-    },
-    "scripts": {
-        "test": "./vendor/bin/phpunit"
+  "name": "piedweb/render-html-attributes",
+  "description": "[Plates and Twig Extension] Transform an array in html tag attributes.",
+  "keywords": [
+    "templating",
+    "template",
+    "view",
+    "plates",
+    "twig",
+    "attributes",
+    "html"
+  ],
+  "homepage": "https://piedweb.com",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": ":Robin",
+      "email": "contact@piedweb.com",
+      "homepage": "https://piedweb.com/",
+      "role": "Developer"
     }
+  ],
+  "require": {
+    "php": "^7.4"
+  },
+  "require-dev": {
+    "league/plates": "3.*",
+    "phpunit/phpunit": "4.*",
+    "twig/twig": "^1 || ^2"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "PiedWeb\\RenderAttributes\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "PiedWeb\\RenderAttributes\\Test\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "./vendor/bin/phpunit"
+  }
 }

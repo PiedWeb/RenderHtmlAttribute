@@ -8,22 +8,22 @@ use Twig\TwigFunction;
 /**
  * Transform an array in html tag attributes
  * Twig Extension
- * PSR-2 Coding Style, PSR-4 Autoloading
+ * PSR-2 Coding Style, PSR-4 Autoloading.
  *
  * @author     Robin <contact@robin-d.fr> https://piedweb.com
- * @link       https://github.com/PiedWeb/render-html-attributes
+ *
+ * @see       https://github.com/PiedWeb/render-html-attributes
  * @since      File available since 2018.11.12
  */
 class TwigExtension extends AbstractExtension
 {
     use AttributesTrait;
 
-
     public function getFunctions()
     {
-        return array(
-            new TwigFunction('mergeAttr', [TwigExtension::class, 'mergeAndMapAttributes'], ['is_safe' => ['html']]),
-            new TwigFunction('attr', [TwigExtension::class, 'mapAttributes'], ['is_safe' => ['html']])
-        );
+        return [
+            new TwigFunction('mergeAttr', [self::class, 'mergeAndMapAttributes'], ['is_safe' => ['html']]),
+            new TwigFunction('attr', [self::class, 'mapAttributes'], ['is_safe' => ['html']]),
+        ];
     }
 }

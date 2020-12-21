@@ -21,20 +21,20 @@ class PlatesTest extends TestCase
 
     public function testMerging()
     {
-        $arr1     = ['class' => 'main'];
-        $arr2     = ['class' => 'content'];
+        $arr1 = ['class' => 'main'];
+        $arr2 = ['class' => 'content'];
         $expected = ['class' => 'main content'];
 
-        $result   = $this->attributes->mergeAttributes($arr1, $arr2);
+        $result = $this->attributes->mergeAttributes($arr1, $arr2);
         $this->assertSame($expected, $result);
     }
 
     public function testRendering()
     {
-        $attr     = ['class' => 'main content', 'loop' => ''];
+        $attr = ['class' => 'main content', 'loop' => ''];
         $expected = ' class="main content" loop';
 
-        $result   = $this->attributes->mapAttributes($attr);
+        $result = $this->attributes->mapAttributes($attr);
 
         $this->assertSame($expected, $result);
     }

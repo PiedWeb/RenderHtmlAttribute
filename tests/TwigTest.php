@@ -6,7 +6,6 @@ use PHPUnit\Framework\TestCase;
 
 class TwigTest extends TestCase
 {
-
     /*
      * @var string
      */
@@ -23,16 +22,16 @@ class TwigTest extends TestCase
 
     public function testRendering()
     {
-        $twig   = '{{ attr({class:"main content"})|raw }}';
-        $expected   = ' class="main content"';
+        $twig = '{{ attr({class:"main content"})|raw }}';
+        $expected = ' class="main content"';
 
         $this->assertSame($this->render($twig), $expected);
     }
 
     public function testMerging()
     {
-        $twig   = '{{ mergeAttr({class:"main"}, {class:"content"})|raw }}';
-        $expected   = ' class="main content"';
+        $twig = '{{ mergeAttr({class:"main"}, {class:"content"})|raw }}';
+        $expected = ' class="main content"';
 
         $this->assertSame($this->render($twig), $expected);
     }
