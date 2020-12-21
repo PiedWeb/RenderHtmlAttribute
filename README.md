@@ -1,4 +1,4 @@
-# Plates/Twig Extension : Render html tag attributes
+# Twig Extension : Render html tag attributes
 
 [![Latest Version](https://img.shields.io/github/tag/PiedWeb/RenderHtmlAttribute.svg?style=flat&label=release)](https://github.com/PiedWeb/RenderHtmlAttribute/tags)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](https://github.com/PiedWeb/RenderHtmlAttribute/blob/master/LICENSE)
@@ -9,6 +9,8 @@
 
 This package is an extension for both [Twig](https://github.com/twigphp/Twig) and Plate engine [Plates](https://github.com/thephpleague/plates).
 
+Plates is not anymore supported since v1.0.3.
+
 Two features for the same goal **Manipulate html tag attributes via object/PHP array** :
 
 - `attr({class: "col", id: "piedweb", data-content:"Hello :)', ...})` transform an array in html tag attributes
@@ -16,7 +18,7 @@ Two features for the same goal **Manipulate html tag attributes via object/PHP a
 
 ## Table of contents
 
-- [Plates/Twig Extension : Render html tag attributes](#platestwig-extension--render-html-tag-attributes)
+- [Twig Extension : Render html tag attributes](#twig-extension--render-html-tag-attributes)
   - [Table of contents](#table-of-contents)
   - [Usage](#usage)
   - [For Twig :](#for-twig-)

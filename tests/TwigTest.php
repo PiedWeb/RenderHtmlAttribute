@@ -3,6 +3,8 @@
 namespace PiedWeb\RenderAttributes\Test;
 
 use PHPUnit\Framework\TestCase;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
 
 class TwigTest extends TestCase
 {
@@ -11,10 +13,10 @@ class TwigTest extends TestCase
      */
     public function render($template)
     {
-        $loader = new \Twig_Loader_Array([
+        $loader = new ArrayLoader([
             'template' => $template,
         ]);
-        $twig = new \Twig_Environment($loader);
+        $twig = new Environment($loader);
         $twig->addExtension(new \PiedWeb\RenderAttributes\TwigExtension());
 
         return $twig->render('template');

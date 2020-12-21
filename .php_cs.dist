@@ -11,10 +11,8 @@ $finder = Symfony\Component\Finder\Finder::create()
 
 return (new PhpCsFixer\Config())
     ->setRules([
+        '@PHPUnit84Migration:risky' => true,
         '@PSR2' => true,
-        '@DoctrineAnnotation' => true,
-        '@Symfony' => true,
-        '@Symfony:risky' => true,
         'array_syntax' => ['syntax' => 'short'],
         'ordered_imports' => ['sortAlgorithm' => 'alpha'],
         'no_unused_imports' => true,

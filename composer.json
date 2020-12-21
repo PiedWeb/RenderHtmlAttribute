@@ -24,9 +24,9 @@
     "php": "^7.4"
   },
   "require-dev": {
-    "league/plates": "3.*",
-    "phpunit/phpunit": "4.*",
-    "twig/twig": "^1 || ^2"
+    "phpunit/phpunit": "^9",
+    "twig/twig": "^2 || ^3",
+    "vimeo/psalm": "^4.3"
   },
   "extra": {
     "branch-alias": {
