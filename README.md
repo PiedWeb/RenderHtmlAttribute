@@ -4,7 +4,7 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/PiedWeb/RenderHtmlAttribute/Tests?label=tests)](https://github.com/PiedWeb/RenderHtmlAttribute/actions)
 [![Quality Score](https://img.shields.io/scrutinizer/g/PiedWeb/RenderHtmlAttribute.svg?style=flat)](https://scrutinizer-ci.com/g/PiedWeb/RenderHtmlAttribute)
-[![Code Coverage](https://codecov.io/gh/PiedWeb/RenderHtmlAttribute/branch/main/graph/badge.svg)](https://codecov.io/gh/PiedWeb/RenderHtmlAttribute/branch/main)
+[![Code Coverage](https://codecov.io/gh/PiedWeb/RenderHtmlAttribute/branch/master/graph/badge.svg)](https://codecov.io/gh/PiedWeb/RenderHtmlAttribute/branch/master)
 [![Type Coverage](https://shepherd.dev/github/PiedWeb/RenderHtmlAttribute/coverage.svg)](https://shepherd.dev/github/PiedWeb/RenderHtmlAttribute)
 [![Total Downloads](https://img.shields.io/packagist/dt/piedweb/render-html-attributes.svg?style=flat)](https://packagist.org/packages/piedweb/render-html-attributes)
 
