@@ -4,21 +4,14 @@ namespace PiedWeb\RenderAttributes;
 
 /**
  * Transform an array in html tag attributes
- * PSR-2 Coding Style, PSR-4 Autoloading.
  *
  * @author     Robin <contact@robin-d.fr> https://piedweb.com
  *
- * @see       https://github.com/RobinDev/platesAttributes
- * @since      File available since Release 2014.12.15
+ * @see       https://github.com/PiedWeb/RenderHtmlAttribute
  */
-trait AttributesTrait
+final class RenderAttributes
 {
-    /**
-     * Merge multiple attributes arrays without erase values.
-     *
-     * @return array
-     */
-    public static function mergeAttributes()
+    public static function mergeAttributes(): array
     {
         $arrays = \func_get_args();
         $result = [];
@@ -30,10 +23,7 @@ trait AttributesTrait
         return $result;
     }
 
-    /**
-     * @return array
-     */
-    protected static function mergeRecursive(array $arr1, array $arr2)
+    protected static function mergeRecursive(array $arr1, array $arr2): array
     {
         foreach ($arr2 as $key => $v) {
             if (\is_array($v)) {
@@ -46,33 +36,29 @@ trait AttributesTrait
         return $arr1;
     }
 
-    /**
-     * Render the attributes.
-     *
-     * @return string
-     */
-    public static function mapAttributes(array $attributes)
+    public static function renderAttributes(array $attributes): string
     {
         $result = '';
 
         foreach ($attributes as $attribute => $value) {
             if (empty($value)) {
                 $result .= ' '.$attribute;
-            } else {
-                $e = false !== strpos($value, ' ') ? '"' : '';
-                $result .= ' '.(\is_int($attribute) ? $value : $attribute.'='.$e.str_replace('"', '&quot;', $value).$e);
+                continue;
             }
+
+            if (is_int($attribute)) {
+                $result .= ' '.$value;
+                continue;
+            }
+
+            $e = str_contains($value, ' ') ? '"' : '';
+            $result .= ' '.$attribute.'='.$e.str_replace('"', '&quot;', $value).$e;
         }
 
         return $result;
     }
 
-    /**
-     * Merge and Map.
-     *
-     * @return string
-     */
-    public static function mergeAndMapAttributes()
+    public static function mergeAndRenderAttributes(): string
     {
         $arrays = \func_get_args();
         $result = [];
@@ -81,6 +67,6 @@ trait AttributesTrait
             $result = self::mergeRecursive($result, $array);
         }
 
-        return self::mapAttributes($result);
+        return self::renderAttributes($result);
     }
 }

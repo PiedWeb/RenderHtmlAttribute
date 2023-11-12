@@ -17,13 +17,11 @@ use Twig\TwigFunction;
  */
 class TwigExtension extends AbstractExtension
 {
-    use AttributesTrait;
-
     public function getFunctions()
     {
         return [
-            new TwigFunction('mergeAttr', [self::class, 'mergeAndMapAttributes'], ['is_safe' => ['html']]),
-            new TwigFunction('attr', [self::class, 'mapAttributes'], ['is_safe' => ['html']]),
+            new TwigFunction('mergeAttr', [RenderAttributes::class, 'mergeAndRenderAttributes'], ['is_safe' => ['html']]),
+            new TwigFunction('attr', [RenderAttributes::class, 'renderAttributes'], ['is_safe' => ['html']]),
         ];
     }
 }
