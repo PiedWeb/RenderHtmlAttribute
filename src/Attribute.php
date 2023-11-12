@@ -9,9 +9,9 @@ namespace PiedWeb\RenderAttributes;
  *
  * @see       https://github.com/PiedWeb/RenderHtmlAttribute
  */
-final class RenderAttributes
+final class Attribute
 {
-    public static function mergeAttributes(): array
+    public static function merge(): array
     {
         $arrays = \func_get_args();
         $result = [];
@@ -36,29 +36,33 @@ final class RenderAttributes
         return $arr1;
     }
 
-    public static function renderAttributes(array $attributes): string
+    public static function render(string $name, string $value = '')
+    {
+        if (in_array($name, ['class', 'style'], true) &&  (!is_string($value) || $value==='')) {
+            return '';
+        }
+
+        if ($value === '') {
+            return ' '.$name;
+        }
+
+        $e = str_contains($value, ' ') ? '"' : '';
+        return ' '.$name.'='.$e.str_replace('"', '&quot;', $value).$e;
+    }
+
+    public static function renderAll(array $attributes): string
     {
         $result = '';
 
-        foreach ($attributes as $attribute => $value) {
-            if (empty($value)) {
-                $result .= ' '.$attribute;
-                continue;
-            }
+        foreach ($attributes as $name => $value) {
 
-            if (is_int($attribute)) {
-                $result .= ' '.$value;
-                continue;
-            }
-
-            $e = str_contains($value, ' ') ? '"' : '';
-            $result .= ' '.$attribute.'='.$e.str_replace('"', '&quot;', $value).$e;
+            $result .= is_int($name) ? static::render($value) : static::render($name, $value);
         }
 
         return $result;
     }
 
-    public static function mergeAndRenderAttributes(): string
+    public static function mergeAndRender(): string
     {
         $arrays = \func_get_args();
         $result = [];
@@ -67,6 +71,6 @@ final class RenderAttributes
             $result = self::mergeRecursive($result, $array);
         }
 
-        return self::renderAttributes($result);
+        return self::renderAll($result);
     }
 }
