@@ -50,6 +50,9 @@ final class Attribute
         return ' '.$name.'='.$e.str_replace('"', '&quot;', $value).$e;
     }
 
+    /**
+     * Previously mapAttributes
+     */
     public static function renderAll(array $attributes): string
     {
         $result = '';

@@ -17,7 +17,7 @@ use Twig\TwigFunction;
  */
 class TwigExtension extends AbstractExtension
 {
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('mergeAttr', [Attribute::class, 'mergeAndRender'], ['is_safe' => ['html']]),
