@@ -17,6 +17,9 @@ use Twig\TwigFunction;
  */
 class TwigExtension extends AbstractExtension
 {
+    /**
+     * @return TwigFunction[]
+     */
     public function getFunctions(): array
     {
         return [
