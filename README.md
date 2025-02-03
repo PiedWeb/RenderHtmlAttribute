@@ -2,11 +2,9 @@
 
 [![Latest Version](https://img.shields.io/github/tag/PiedWeb/RenderHtmlAttribute.svg?style=flat&label=release)](https://github.com/PiedWeb/RenderHtmlAttribute/tags)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/PiedWeb/PiedWeb/Tests?label=tests)](https://github.com/PiedWeb/RenderHtmlAttribute/actions)
-[![Quality Score](https://img.shields.io/scrutinizer/g/PiedWeb/PiedWeb.svg?style=flat)](https://scrutinizer-ci.com/g/PiedWeb/RenderHtmlAttribute)
 [![Code Coverage](https://codecov.io/gh/PiedWeb/PiedWeb/branch/main/graph/badge.svg)](https://codecov.io/gh/PiedWeb/PiedWeb/branch/main)
 [![Type Coverage](https://shepherd.dev/github/PiedWeb/PiedWeb/coverage.svg)](https://shepherd.dev/github/PiedWeb/PiedWeb)
-[![Total Downloads](https://img.shields.io/packagist/dt/piedweb/RenderHtmlAttribute.svg?style=flat)](https://packagist.org/packages/piedweb/render-html-attributes)
+[![Total Downloads](https://img.shields.io/packagist/dt/piedweb/render-html-attributes.svg?style=flat)](https://packagist.org/packages/piedweb/render-html-attributes)
 
 This package is an extension for both [Twig](https://github.com/twigphp/Twig) and ~Plate engine [Plates](https://github.com/thephpleague/plates)~.
 
