@@ -12,7 +12,7 @@ use Twig\TwigFunction;
  *
  * @author     Robin <contact@robin-d.fr> https://piedweb.com
  *
- * @see       https://github.com/PiedWeb/render-html-attributes
+ * @see       https://github.com/PiedWeb/RenderHtmlAttribute
  * @since      File available since 2018.11.12
  */
 class TwigExtension extends AbstractExtension

@@ -38,7 +38,6 @@ class TwigTest extends TestCase
         $this->assertSame($this->render($twig), $expected);
     }
 
-
     public function testEmptyClassOrStyle()
     {
         $twig = '{{ mergeAttr({class:""}, ["style"])|raw }}';

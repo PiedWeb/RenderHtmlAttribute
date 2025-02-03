@@ -3,7 +3,7 @@
 namespace PiedWeb\RenderAttributes;
 
 /**
- * Transform an array in html tag attributes
+ * Transform an array in html tag attributes.
  *
  * @author     Robin <contact@robin-d.fr> https://piedweb.com
  *
@@ -38,28 +38,28 @@ final class Attribute
 
     public static function render(string $name, string $value = '')
     {
-        if (in_array($name, ['class', 'style'], true) &&  (!is_string($value) || $value==='')) {
+        if (\in_array($name, ['class', 'style'], true) && (! \is_string($value) || '' === $value)) {
             return '';
         }
 
-        if ($value === '') {
+        if ('' === $value) {
             return ' '.$name;
         }
 
-        $e = str_contains($value, ' ') ? '"' : '';
+        $e = '"'; // str_contains($value, ' ') ? '"' : '';
+
         return ' '.$name.'='.$e.str_replace('"', '&quot;', $value).$e;
     }
 
     /**
-     * Previously mapAttributes
+     * Previously mapAttributes.
      */
     public static function renderAll(array $attributes): string
     {
         $result = '';
 
         foreach ($attributes as $name => $value) {
-
-            $result .= is_int($name) ? static::render($value) : static::render($name, $value);
+            $result .= \is_int($name) ? static::render($value) : static::render($name, $value);
         }
 
         return $result;
