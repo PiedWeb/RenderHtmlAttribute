@@ -23,8 +23,8 @@ class TwigExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('mergeAttr', [Attribute::class, 'mergeAndRender'], ['is_safe' => ['html']]),
-            new TwigFunction('attr', [Attribute::class, 'renderAll'], ['is_safe' => ['html']]),
+            new TwigFunction('mergeAttr', Attribute::mergeAndRender(...), ['is_safe' => ['html']]),
+            new TwigFunction('attr', Attribute::renderAll(...), ['is_safe' => ['html']]),
         ];
     }
 }

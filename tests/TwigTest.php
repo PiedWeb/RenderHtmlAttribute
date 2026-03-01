@@ -11,7 +11,7 @@ class TwigTest extends TestCase
     /*
      * @var string
      */
-    public function render($template)
+    public function render($template): string
     {
         $loader = new ArrayLoader([
             'template' => $template,
@@ -22,7 +22,7 @@ class TwigTest extends TestCase
         return $twig->render('template');
     }
 
-    public function testRendering()
+    public function testRendering(): void
     {
         $twig = '{{ attr({class:"main content"})|raw }}';
         $expected = ' class="main content"';
@@ -30,7 +30,7 @@ class TwigTest extends TestCase
         $this->assertSame($this->render($twig), $expected);
     }
 
-    public function testMerging()
+    public function testMerging(): void
     {
         $twig = '{{ mergeAttr({class:"main"}, {class:"content"})|raw }}';
         $expected = ' class="main content"';
@@ -38,10 +38,18 @@ class TwigTest extends TestCase
         $this->assertSame($this->render($twig), $expected);
     }
 
-    public function testEmptyClassOrStyle()
+    public function testEmptyClassOrStyle(): void
     {
         $twig = '{{ mergeAttr({class:""}, ["style"])|raw }}';
         $expected = '';
+
+        $this->assertSame($this->render($twig), $expected);
+    }
+
+    public function testNullValuesAreSkipped(): void
+    {
+        $twig = '{{ mergeAttr({src:"/image.svg", width:null, height:null, alt:"icon"})|raw }}';
+        $expected = ' src="/image.svg" alt="icon"';
 
         $this->assertSame($this->render($twig), $expected);
     }
