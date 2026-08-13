@@ -12,6 +12,13 @@ namespace PiedWeb\RenderAttributes;
 final class Attribute
 {
     /**
+     * Attributes holding a space separated token list : merging them concatenates
+     * the tokens (duplicates removed). Every other attribute is replaced by the
+     * last merged value.
+     */
+    private const array TOKEN_LIST_ATTRIBUTES = ['class', 'rel', 'aria-describedby', 'aria-labelledby'];
+
+    /**
      * @param array<string, mixed> ...$arrays
      *
      * @return array<string, mixed>
@@ -47,13 +54,22 @@ final class Attribute
                 $vArray = $v;
                 $arr1[$key] = [] !== $existing ? self::mergeRecursive($existing, $vArray) : $v;
             } else {
-                $vStr = \is_scalar($v) ? (string) $v : '';
+                $vStr = \is_scalar($v) || $v instanceof \Stringable ? (string) $v : '';
                 $existingStr = isset($arr1[$key]) && \is_scalar($arr1[$key]) ? (string) $arr1[$key] : '';
-                $arr1[$key] = '' !== $existingStr ? $existingStr.($existingStr !== $vStr ? ' '.$vStr : '') : $vStr;
+                $arr1[$key] = \in_array($key, self::TOKEN_LIST_ATTRIBUTES, true)
+                    ? self::mergeTokens($existingStr, $vStr)
+                    : $vStr;
             }
         }
 
         return $arr1;
+    }
+
+    private static function mergeTokens(string $existing, string $new): string
+    {
+        $tokens = preg_split('/\s+/', $existing.' '.$new, -1, \PREG_SPLIT_NO_EMPTY) ?: [];
+
+        return implode(' ', array_unique($tokens));
     }
 
     public static function render(string $name, string $value = ''): string

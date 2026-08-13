@@ -13,14 +13,34 @@ Plates is not anymore supported since v1.0.3.
 Two features for the same goal **Manipulate html tag attributes via object/PHP array** :
 
 - `attr({class: "col", id: "piedweb", data-content:"Hello :)', ...})` transform an array in html tag attributes
-- `mergeAttr($attributes1, $attributes2, [$attributes3, ...])` merge multiple array without loosing values (Eg. : `['class' => 'main']` + `['class' => 'content']` = `['class' => 'main content']`)
+- `mergeAttr($attributes1, $attributes2, [$attributes3, ...])` merge multiple arrays, the last value winning (Eg. : `['sizes' => '100vw']` + `['sizes' => '63vw']` = `['sizes' => '63vw']`), except for [token list attributes](#token-list-attributes) whose tokens are concatenated (Eg. : `['class' => 'main']` + `['class' => 'content']` = `['class' => 'main content']`)
+
+### Token list attributes
+
+These attributes hold a space separated list of tokens, so merging them concatenates
+the tokens instead of replacing the value. Duplicated tokens are dropped
+(`class="btn"` + `class="btn btn-lg"` = `class="btn btn-lg"`).
+
+- `class`
+- `rel`
+- `aria-describedby`
+- `aria-labelledby`
+
+Every other attribute (`src`, `srcset`, `sizes`, `alt`, `id`, `style`, `width`,
+`height`, `loading`, …) is replaced by the last value merged in, which is what lets a
+caller override an attribute already set by a template.
+
+Values are stringified when they are scalar or `Stringable` — a `Twig\Markup`, as
+returned by a Twig macro, is therefore rendered as its string content.
 
 ## Table of contents
 
 - [Twig Extension : Render html tag attributes](#twig-extension--render-html-tag-attributes)
+  - [Token list attributes](#token-list-attributes)
   - [Table of contents](#table-of-contents)
   - [Usage](#usage)
   - [Installation](#installation)
+  - [Upgrade](#upgrade)
   - [Requirements](#requirements)
   - [Contributors](#contributors)
   - [License](#license)
@@ -49,6 +69,31 @@ Then use it :
 ```bash
 composer require piedweb/render-html-attributes
 ```
+
+## Upgrade
+
+### Scalar attributes are now replaced instead of concatenated
+
+**This changes an observable behaviour.** `mergeAttr` used to concatenate *every*
+scalar value, so an attribute already set by a template could never be overridden by
+a caller — it got both values glued together (`sizes="100vw 63vw"`, and the same
+corruption on `src`, `alt`, `id`, `style`, `width`, `height`, `loading`, `srcset`).
+
+Merging now applies last-wins to every attribute outside the
+[token list](#token-list-attributes). A project relying on the concatenation of an
+attribute that is *not* in that list will see its rendering change: pass the final
+value instead, or merge the parts yourself.
+
+`class` (and the other token list attributes) keep concatenating, so the common
+"template sets a base class, caller adds one" pattern is unchanged. Duplicated tokens
+are now dropped, though: `class="btn"` + `class="btn btn-lg"` used to render
+`class="btn btn btn-lg"` and now renders `class="btn btn-lg"`.
+
+### `Stringable` values are no longer emptied
+
+A non-scalar value was silently rendered as an empty attribute. `Stringable` objects
+— including the `Twig\Markup` returned by any Twig macro — are now stringified, so an
+attribute fed by a macro finally carries its value.
 
 ## Requirements
 
