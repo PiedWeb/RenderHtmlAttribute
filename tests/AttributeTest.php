@@ -62,4 +62,20 @@ class AttributeTest extends TestCase
 
         $this->assertSame(['data' => ['class' => 'main content', 'id' => 'second']], $merged);
     }
+
+    public function testRenderingANestedArrayIsRejected(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Attribute data cannot be rendered : expected a scalar or a Stringable, got array.');
+
+        Attribute::mergeAndRender(['data' => ['controller' => 'modal']]);
+    }
+
+    public function testRenderingAnUnstringableObjectIsRejected(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('got stdClass');
+
+        Attribute::renderAll(['src' => new \stdClass()]);
+    }
 }

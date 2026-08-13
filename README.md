@@ -89,6 +89,17 @@ value instead, or merge the parts yourself.
 are now dropped, though: `class="btn"` + `class="btn btn-lg"` used to render
 `class="btn btn btn-lg"` and now renders `class="btn btn-lg"`.
 
+### Unrenderable values now throw instead of rendering garbage
+
+`merge` recurses into nested arrays, but an array has no html attribute form, so
+`attr` and `mergeAttr` used to emit a PHP `Array to string conversion` warning and
+render `data="Array"`. They now throw an `InvalidArgumentException` naming the
+attribute and the type received. The same applies to any object that is not
+`Stringable`, which previously died with a less helpful conversion error.
+
+Nesting remains supported by `merge` itself, which returns the merged array
+untouched — only rendering rejects it.
+
 ### `Stringable` values are no longer emptied
 
 A non-scalar value was silently rendered as an empty attribute. `Stringable` objects

@@ -14,9 +14,15 @@ final class Attribute
     /**
      * Attributes holding a space separated token list : merging them concatenates
      * the tokens (duplicates removed). Every other attribute is replaced by the
-     * last merged value.
+     * last merged value. Kept as a map so the lookup is a hash hit per attribute
+     * rather than a scan.
      */
-    private const array TOKEN_LIST_ATTRIBUTES = ['class', 'rel', 'aria-describedby', 'aria-labelledby'];
+    private const array TOKEN_LIST_ATTRIBUTES = [
+        'class' => true,
+        'rel' => true,
+        'aria-describedby' => true,
+        'aria-labelledby' => true,
+    ];
 
     /**
      * @param array<string, mixed> ...$arrays
@@ -29,7 +35,7 @@ final class Attribute
         $result = [];
 
         foreach ($arrays as $array) {
-            $result = self::mergeRecursive($result, $array);
+            self::mergeRecursive($result, $array);
         }
 
         /** @var array<string, mixed> */
@@ -37,32 +43,39 @@ final class Attribute
     }
 
     /**
+     * $arr1 is taken by reference so merging a list of arrays does not copy the
+     * accumulator once per array.
+     *
      * @param array<string, mixed> $arr1
      * @param array<string, mixed> $arr2
-     *
-     * @return array<string, mixed>
      */
-    private static function mergeRecursive(array $arr1, array $arr2): array
+    private static function mergeRecursive(array &$arr1, array $arr2): void
     {
         foreach ($arr2 as $key => $v) {
             if (null === $v) {
                 $arr1[$key] = null;
             } elseif (\is_array($v)) {
-                /** @var array<string, mixed> $existing */
-                $existing = isset($arr1[$key]) && \is_array($arr1[$key]) ? $arr1[$key] : [];
                 /** @var array<string, mixed> $vArray */
                 $vArray = $v;
-                $arr1[$key] = [] !== $existing ? self::mergeRecursive($existing, $vArray) : $v;
+
+                if (isset($arr1[$key]) && \is_array($arr1[$key]) && [] !== $arr1[$key]) {
+                    /** @var array<string, mixed> $existing */
+                    $existing = &$arr1[$key];
+                    self::mergeRecursive($existing, $vArray);
+                } else {
+                    $arr1[$key] = $v;
+                }
             } else {
                 $vStr = \is_scalar($v) || $v instanceof \Stringable ? (string) $v : '';
-                $existingStr = isset($arr1[$key]) && \is_scalar($arr1[$key]) ? (string) $arr1[$key] : '';
-                $arr1[$key] = \in_array($key, self::TOKEN_LIST_ATTRIBUTES, true)
-                    ? self::mergeTokens($existingStr, $vStr)
-                    : $vStr;
+
+                if (isset(self::TOKEN_LIST_ATTRIBUTES[$key])) {
+                    $existing = $arr1[$key] ?? null;
+                    $vStr = self::mergeTokens(\is_scalar($existing) ? (string) $existing : '', $vStr);
+                }
+
+                $arr1[$key] = $vStr;
             }
         }
-
-        return $arr1;
     }
 
     private static function mergeTokens(string $existing, string $new): string
@@ -74,23 +87,22 @@ final class Attribute
 
     public static function render(string $name, string $value = ''): string
     {
-        if (\in_array($name, ['class', 'style'], true) && '' === $value) {
-            return '';
-        }
-
         if ('' === $value) {
-            return ' '.$name;
+            return 'class' === $name || 'style' === $name ? '' : ' '.$name;
         }
 
-        $e = '"'; // str_contains($value, ' ') ? '"' : '';
-
-        return ' '.$name.'='.$e.str_replace('"', '&quot;', $value).$e;
+        return ' '.$name.'="'.str_replace('"', '&quot;', $value).'"';
     }
 
     /**
      * Previously mapAttributes.
      *
-     * @param array<int|string, string|null> $attributes
+     * merge() recurses into nested arrays, but an array has no html attribute
+     * form, so rendering one is rejected instead of emitting name="Array".
+     *
+     * @param array<int|string, mixed> $attributes
+     *
+     * @throws \InvalidArgumentException when a value cannot be rendered
      */
     public static function renderAll(array $attributes): string
     {
@@ -101,7 +113,11 @@ final class Attribute
                 continue;
             }
 
-            $result .= \is_int($name) ? self::render($value) : self::render($name, (string) $value);
+            if (! \is_scalar($value) && ! $value instanceof \Stringable) {
+                throw new \InvalidArgumentException(\sprintf('Attribute %s cannot be rendered : expected a scalar or a Stringable, got %s.', \is_int($name) ? '#'.$name : $name, get_debug_type($value)));
+            }
+
+            $result .= \is_int($name) ? self::render((string) $value) : self::render($name, (string) $value);
         }
 
         return $result;
@@ -116,7 +132,7 @@ final class Attribute
         $result = [];
 
         foreach ($arrays as $array) {
-            $result = self::mergeRecursive($result, $array);
+            self::mergeRecursive($result, $array);
         }
 
         /** @var array<int|string, string> $result */
